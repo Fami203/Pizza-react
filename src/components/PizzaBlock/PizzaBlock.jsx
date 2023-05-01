@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
+const PizzaBlock = ({ title, price, imageUrl, sizes, types, category }) => {
   let [activeType, setActiveType] = React.useState(0);
   let [activeSize, setActiveSize] = React.useState(0);
 
