@@ -93,6 +93,10 @@ body {
   }
 }
 
+.container--cart .content__items {
+  display: block;
+}
+
 .container {
   width: $container-width;
   margin: 0 auto;
