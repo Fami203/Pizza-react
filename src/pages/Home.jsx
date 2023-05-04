@@ -8,9 +8,12 @@ import Sort from '../components/Sort';
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // isLoading установлено на true в начале
+  const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, setSortType] = React.useState(0);
 
   React.useEffect(() => {
-    fetch('https://64425f4933997d3ef90e78c1.mockapi.io/items')
+    setIsLoading(true);
+    fetch('https://64425f4933997d3ef90e78c1.mockapi.io/items?category=' + categoryId)
       .then((res) => {
         return res.json();
       })
@@ -19,13 +22,13 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, []);
+  }, [categoryId, sortType]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories value={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
+        <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

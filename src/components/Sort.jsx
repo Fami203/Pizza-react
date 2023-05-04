@@ -1,13 +1,12 @@
 import React from 'react';
 
-function Sort() {
-  const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState(0);
+function Sort({ value, onChangeSort }) {
+  const [open, setOpen] = React.useState(true);
 
   const list = ['популярности', 'цене', 'алфавиту'];
 
   const onClickListItem = (i) => {
-    setSelected(i);
+    onChangeSort(i);
     setOpen(false);
   };
   return (
@@ -29,7 +28,7 @@ function Sort() {
           onClick={() => {
             setOpen(!open);
           }}>
-          {list[selected]}
+          {list[value]}
         </span>
       </div>
       {open && (
@@ -38,7 +37,7 @@ function Sort() {
             {list.map((name, i) => (
               <li
                 key={i}
-                className={selected === i ? 'active' : ''}
+                className={value === i ? 'active' : ''}
                 onClick={() => onClickListItem(i)}>
                 {name}
               </li>
