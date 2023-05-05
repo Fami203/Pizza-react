@@ -9,11 +9,20 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true); // isLoading установлено на true в начале
   const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState(0);
+  const [sortType, setSortType] = React.useState({
+    name: 'популярности',
+    sortProperty: 'rating',
+  });
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch('https://64425f4933997d3ef90e78c1.mockapi.io/items?category=' + categoryId)
+    fetch(
+      `https://64425f4933997d3ef90e78c1.mockapi.io/items?${
+        categoryId > 0 ? `category=${categoryId}` : ''
+      }&sortBy=${sortType.sortProperty.replace('-', '')}&order=${
+        sortType.sortProperty.includes('-') ? 'asc' : 'desc'
+      }`,
+    )
       .then((res) => {
         return res.json();
       })
